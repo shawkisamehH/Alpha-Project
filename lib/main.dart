@@ -1,6 +1,7 @@
 // import 'package:dialogflow_flutter/language.dart';
 import 'package:flutter/material.dart';
 import 'package:trainflutter/Services/services.dart';
+import 'package:trainflutter/auth/Auth.dart';
 import 'package:trainflutter/localizations/changelocal.dart';
 import 'package:trainflutter/localizations/transliation.dart';
 //import 'package:trainflutter/pages/chatbot.dart';
@@ -8,10 +9,13 @@ import 'package:trainflutter/localizations/transliation.dart';
 import 'package:get/get.dart';  
 import 'package:trainflutter/pages/lang.dart';
 import 'package:trainflutter/route.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 
 void main() async  {
+
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   await initialServices(); 
   runApp(const MyApp());
 }

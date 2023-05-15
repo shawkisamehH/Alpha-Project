@@ -53,6 +53,7 @@ goTosignIn();
     nationalid.dispose();
     username.dispose();
     Phone.dispose();
+    super.dispose();
    }
 
   

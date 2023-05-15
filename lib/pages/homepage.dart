@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:trainflutter/constant/routes.dart';
 import 'package:trainflutter/pages/bodyhomepage.dart';
 import 'Navbar.dart';
+import 'package:kommunicate_flutter/kommunicate_flutter.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});
@@ -87,10 +88,22 @@ class _homepageState extends State<homepage> {
           height:80,
           width:68  ,) ,
          
-          tooltip:'connect to Alpha' ,
-          onPressed: (() {
-         Get.toNamed(AppRoute.chat);
-        } ) ,
+          tooltip:'Increment' ,
+          onPressed: ()async {
+          try{
+
+                dynamic conversationObject = {
+     'appId': '6944106d889d7e68d672da73136d444f',
+     };
+
+     dynamic result =await KommunicateFlutterPlugin.buildConversation(conversationObject);
+        
+      print("Conversation builder success : " + result.toString());
+    } on Exception catch(error){
+      print("Conversation builder error : " + error.toString());
+    };
+          }
+          ,
         
           ),
       ));

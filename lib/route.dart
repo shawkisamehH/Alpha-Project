@@ -5,6 +5,7 @@
 
 import 'package:dialogflow_grpc/generated/google/cloud/dialogflow/v2/context.pb.dart';
 import 'package:flutter/material.dart';
+import 'package:trainflutter/auth/Auth.dart';
 import 'package:trainflutter/auth/login.dart';
 import 'package:trainflutter/auth/signup.dart';
 import 'package:trainflutter/constant/routes.dart';
@@ -25,8 +26,9 @@ import 'pages/tripdetails.dart';
 Map<String, Widget Function(BuildContext)> routes={
 
 AppRoute.signUp:(Context) =>const signUp(),
+AppRoute.Auth:(Context) =>const Auth(),
 AppRoute.tripdetails:(Context)=>const tripdetails(),
-AppRoute.chat:(Context)=> Chat(),
+//AppRoute.chat:(Context)=> Chat(),
 AppRoute.homepage:(Context) =>const homepage(),
 AppRoute.home:(Context)=> const home(),
 AppRoute.previostrip:(Context)=>const previostrip(), 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trainflutter/auth/custombuttonauth.dart';
@@ -18,11 +19,46 @@ class signUp extends StatefulWidget {
 }
 
 class _signUpState extends State<signUp> {
+
+  final _emailcontroller = TextEditingController();
+ final _passwordcontroller = TextEditingController();
+ final _confirmpasswordcontroller = TextEditingController();
+ Future signUp() async{
+  if(passwordConfirmed()){
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    email:_emailcontroller.text.trim(),
+     password:_passwordcontroller.text.trim());
+     
+     Get.offNamed(AppRoute.Auth);
+  }
+ }
+ bool passwordConfirmed(){
+  if(
+    _confirmpasswordcontroller.text.trim()==
+    _passwordcontroller.text.trim()
+  ){
+    return true;
+
+  }else{
+    return false;
+
+  }
+ }
+  @override
+
+  void dispose(){
+    super.dispose();
+    _emailcontroller.dispose();
+    _passwordcontroller.dispose();
+    _confirmpasswordcontroller.dispose();
+
+  }
   @override
   Widget build(BuildContext context) {
     
-    signUpControllerImp controller = Get.put(signUpControllerImp());
+    //signUpControllerImp controller = Get.put(signUpControllerImp());
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       appBar:AppBar(
       centerTitle:true,
       backgroundColor:Colors.white30 ,
@@ -36,115 +72,183 @@ class _signUpState extends State<signUp> {
       ),
 
 
-      body:WillPopScope(
+      body:WillPopScope( 
         onWillPop:alertExitApp,
         child: Container(
         padding:const EdgeInsets.symmetric(vertical:15,horizontal:30 ) ,
-        child:Form(
-          key:controller.formstate ,
-          child: ListView(
-            children:  [
-               
-              Text('Journey Journal',
-              
-              textAlign:TextAlign.center ,
-              style:TextStyle(
-                color:Colors.orange[900] ,
-                fontSize:30,
-                fontWeight:FontWeight.bold  
-              ) , ),
-              SizedBox(height:20 ,),
+        child:ListView(
+          children:  [
              
-              SizedBox(height:30,), 
-               CustomTextFormAuth(
-                valid: (val) {
-                  return validInput(val!, 5,60, 'username');
-                },
-                mycontroller: controller.username,
-              hinttext:'Enter Your Username',
-               iconData:Icons.person_2_outlined ,
-                labeltext: 'Username',
-               
-             ),
-              //Email
-             CustomTextFormAuth(
-               valid: (val) {
-                  return validInput(val!, 5,60, 'email');
-                },
-              mycontroller: controller.email,
-              hinttext:'Enter Your Email',
-               iconData:Icons.email_outlined ,
-                labeltext: 'Email',
-                
-             ),
-            
-               CustomTextFormAuth(
-                 valid: (val) {
-                  return validInput(val!, 14,14, 'nationalid');
-                },
-                mycontroller: controller.nationalid,
-              hinttext:'Your ID',
-               iconData:Icons.card_membership_outlined ,
-                labeltext: 'National ID ',
-                 
-             ),
-               CustomTextFormAuth(
-                 valid: (val) {
-                  return validInput(val!, 11,11, 'phone');
-                },
-                mycontroller: controller.Phone,
-              hinttext:'Enter Your Phone',
-               iconData:Icons.phone_android_outlined ,
-                labeltext: 'Phone',
-                
-             ),
-              CustomTextFormAuth(
-                 valid: (val) {
-                  return validInput(val!, 8,30, 'password');
-                },
-                mycontroller: controller.password,
-              hinttext:'Enter Your Password',
-               iconData:Icons.lock_outline ,
-                labeltext: 'Password ',
-                
-             ),
-             Text(
-              'Forget Password',
-              textAlign: TextAlign.end,
-              style:TextStyle(
-                color:Colors.blue,
-                fontWeight:FontWeight.bold  
-              ) ,
-             ),
-             CustomButtonAuth(
-              text: 'Sign Up',onPressed: (){
-                controller.signUp();
-              }, 
+            const Text('Welcome',
+            textAlign:TextAlign.center ,
+            style:TextStyle(
+              fontSize:30,
+              fontWeight:FontWeight.bold  
+            ) , ),
+            const SizedBox(height:20 ,),
+            const CircleAvatar(
+              radius:120 ,
               
+              backgroundImage:AssetImage('asset/images/logo2.jpg') ,
             ),
-            SizedBox(height:10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(' have an account ?'),
-                InkWell(
-                  onTap:(){
-                    controller.goTosignIn();
-                  } ,
-                  child: Text('Sign In',
-                style:TextStyle(color:Colors.orange[900],
-                fontWeight:FontWeight.bold  ) ,
-                ),)
+            const SizedBox(height:30,), 
         
-              ],
-            ),
-        
-        
-          ]),
-        ) ,
-      )
+            //Email
+           Padding(
+            
+             padding: const EdgeInsets.symmetric(
+              horizontal: 25,
+             ),
+             child: Container(
+              decoration:BoxDecoration(
+                color:Colors.white,
+                borderRadius:BorderRadius.circular(12) 
+              ) ,
+               child: Padding(
+                 padding: const EdgeInsets.symmetric(
+                  horizontal: 20
+                 ),
+                 child: TextField(
+                  controller:_emailcontroller ,
+                  decoration:InputDecoration(
+                    border:InputBorder.none,
+                    hintText:'Email'  
+                  ) ,
+                 
+                    
+                 ),
+               ),
+             ),
+           ),
+          SizedBox(height:10 ,),
 
-     ) );
+           Padding(
+            
+             padding: const EdgeInsets.symmetric(
+              horizontal: 25,
+             ),
+             child: Container(
+              decoration:BoxDecoration(
+                color:Colors.white,
+                borderRadius:BorderRadius.circular(12) 
+              ) ,
+               child: Padding(
+                 padding: const EdgeInsets.symmetric(
+                  horizontal: 20
+                 ),
+                 child: TextField(
+                  controller: _passwordcontroller,
+                  obscureText:true ,
+                  decoration:InputDecoration(
+                    border:InputBorder.none,
+                    hintText:'Password'  
+                  ) ,
+                 
+                 
+                    
+                 ),
+               ),
+             ),
+           ),
+           SizedBox(height: 10,),
+              Padding(
+            
+             padding: const EdgeInsets.symmetric(
+              horizontal: 25,
+             ),
+             child: Container(
+              decoration:BoxDecoration(
+                color:Colors.white,
+                borderRadius:BorderRadius.circular(12) 
+              ) ,
+               child: Padding(
+                 padding: const EdgeInsets.symmetric(
+                  horizontal: 20
+                 ),
+                 child: TextField(
+                  controller: _confirmpasswordcontroller,
+                  obscureText:true ,
+                  decoration:InputDecoration(
+                    border:InputBorder.none,
+                    hintText:'Confirm Password'  
+                  ) ,
+                 
+                 
+                    
+                 ),
+               ),
+             ),
+           ),
+           
+           SizedBox(height: 20,),
+
+           Padding(
+             padding: const EdgeInsets.symmetric(
+              horizontal: 25
+             ),
+             child: GestureDetector(
+              onTap:signUp ,
+               child: Container(
+                padding:EdgeInsets.all(16) ,
+                decoration:BoxDecoration(
+                  borderRadius:BorderRadius.circular(12) ,
+             
+                  color:Colors.amber[900] 
+                        
+                ) ,
+                child:Center(child: Text('Sign Up',
+                style:TextStyle(
+                  color:Colors.white,
+                  fontWeight:FontWeight.bold,
+                  fontSize: 18 
+             
+                ) ,
+                )) ,
+               ),
+             ),
+           ),
+           SizedBox(height: 25,),
+           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+             children: [
+               Text('Are you a member?',
+                style:TextStyle(
+                
+                fontWeight:FontWeight.bold  
+               )),
+               GestureDetector(
+                onTap: (){
+                  Get.offNamed(AppRoute.login);
+                },
+                 child: Text(' Sign In',
+                 style:TextStyle(
+                  color:Colors.green,
+                  fontWeight:FontWeight.bold  
+                 ) ,),
+               )
+             ],
+           )
+
+
+
+
+
+          //    CustomTextFormAuth(
+          //      valid: (val) {
+          //        return validInput(val!,14,14, 'nationalid');
+          //     },
+          //      mycontroller: controller.nationalid,
+          //   hinttext:'Your ID',
+          //    iconData:Icons.card_membership_outlined ,
+          //     labeltext: 'National ID ',
+              
+          //  ),
+            
+           
+              
+             
+        ] )),
+        ) , );
   }
 }
 

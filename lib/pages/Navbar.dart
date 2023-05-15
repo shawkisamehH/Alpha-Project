@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, avoid_print
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:trainflutter/constant/routes.dart';
@@ -112,7 +113,7 @@ class Navbar extends StatelessWidget {
             fontSize: 20,fontStyle:FontStyle.italic ) ,),
              leading: Icon(Icons.exit_to_app_outlined,color:Colors.orange[900] ,),
           onTap: () {
-               print('shawki');
+              FirebaseAuth.instance.signOut();
           },
          ),
       ]),

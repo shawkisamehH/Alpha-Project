@@ -15,7 +15,7 @@ goTosignUp();
  class LoginControllerImp extends LoginController{
   GlobalKey<FormState> formstate=GlobalKey<FormState>();
 
- late TextEditingController username;
+ late TextEditingController email;
  late TextEditingController nationalid;
  late TextEditingController password;
  bool isshowpassword = true;
@@ -47,7 +47,7 @@ goTosignUp();
    }
    @override
    Void? onInit(){
-    username = TextEditingController();
+    email = TextEditingController();
      password = TextEditingController();
       nationalid = TextEditingController();
         super.onInit();
@@ -56,9 +56,10 @@ goTosignUp();
    @override
    void dispose(){
 
-    username.dispose();
+    email.dispose();
     password.dispose();
     nationalid.dispose();
+    super.onInit();
    }
 
   

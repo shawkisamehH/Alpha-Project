@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "943379058914",
+    "project_id": "alpha-team-b00f3",
+    "storage_bucket": "alpha-team-b00f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:943379058914:android:f0e986d23b44802d428ebb",
+        "android_client_info": {
+          "package_name": "com.example.trainflutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "943379058914-pcair5rvphc7pi9l61ile52uohceouuj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc2Cz1mOt1WOhafJtGEhDTYXp9YguqXAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "943379058914-pcair5rvphc7pi9l61ile52uohceouuj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

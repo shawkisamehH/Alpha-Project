@@ -16,6 +16,7 @@ static const String bookhotel ='/bookhotel';
 static const String home     ='/home';
 static const String chat    ='/chat';
 static const String tripdetails='/tripdetails';
+static const String Auth = '/Auth';
 
 
 
